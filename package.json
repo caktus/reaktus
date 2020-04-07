@@ -2,6 +2,17 @@
   "name": "reaktus",
   "version": "0.1.0",
   "description": "",
+  "keywords": [
+    "react",
+    "component",
+    "library"
+  ],
+  "author": "Caktus Group",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caktus/reaktus"
+  },
   "main": "lib/index.js",
   "browser": "lib/index.umd.js",
   "module": "lib/index.es.js",
@@ -16,13 +27,6 @@
     "postbuild": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "docs:build": "styleguidist build"
   },
-  "keywords": [
-    "react",
-    "component",
-    "library"
-  ],
-  "author": "Caktus Group",
-  "license": "ISC",
   "peerDependencies": {
     "prop-types": "^15.x",
     "styled-components": "5.x",
@@ -50,6 +54,7 @@
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-uglify": "^6.0.2",
     "styled-components": "^5.1.0",
+    "tinycolor2": "^1.4.1",
     "webpack": "^4.38.0"
   }
 }

@@ -1,10 +1,20 @@
 import React from "react";
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ButtonStyled from './Button.styled';
 
-export default function Button({ children, onClick }) {
-  return <ButtonStyled onClick={onClick}>{children}</ButtonStyled>;
+export default function Button({ children, onClick, ...props }) {
+  return <ButtonStyled {...props} onClick={onClick}>{children}</ButtonStyled>;
 }
 
-const ButtonStyled = styled.button`
-  background: pink;
-`;
+/* PropTypes */
+export const POSITIVE = "positive";
+export const CAUTION = "caution";
+export const NEUTRAL = "neutral";
+
+Button.propTypes = {
+  type: PropTypes.oneOf(POSITIVE, CAUTION, NEUTRAL)
+}
+
+Button.defaultProps = {
+  type: POSITIVE
+};
