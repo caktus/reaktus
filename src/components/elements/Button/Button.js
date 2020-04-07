@@ -6,15 +6,18 @@ export default function Button({ children, onClick, ...props }) {
   return <ButtonStyled {...props} onClick={onClick}>{children}</ButtonStyled>;
 }
 
-/* PropTypes */
+/* Props */
 export const POSITIVE = "positive";
 export const CAUTION = "caution";
 export const NEUTRAL = "neutral";
 
 Button.propTypes = {
-  type: PropTypes.oneOf(POSITIVE, CAUTION, NEUTRAL)
-}
+  /** Reflects the state of the button */
+  type: PropTypes.oneOf([POSITIVE, CAUTION, NEUTRAL]),
+  /** What happens when the button is clicked */
+  onClick: PropTypes.func.isRequired,
+};
 
 Button.defaultProps = {
-  type: POSITIVE
+  type: POSITIVE,
 };

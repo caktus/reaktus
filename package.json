@@ -41,6 +41,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.14",
     "babel-plugin-module-resolver": "^3.2.0",
+    "framer-motion": "^1.10.3",
     "jest": "^24.8.0",
     "jest-emotion": "^10.0.14",
     "react": "^16.8.6",
