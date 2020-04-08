@@ -7,6 +7,13 @@ module.exports = {
     '**/*.test.{js,jsx,ts,tsx}',
     '**/*.styled.{js,jsx,ts,tsx}',
   ],
+  styles: {
+    StyleGuide: {
+      '@global body': {
+        fontFamily: 'Arial'
+      }
+    }
+  },
   webpackConfig: {
     module: {
       rules: [

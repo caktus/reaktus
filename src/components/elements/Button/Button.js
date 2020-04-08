@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import ButtonStyled from './Button.styled';
 
 export default function Button({ children, onClick, ...props }) {
-  return <ButtonStyled {...props} onClick={onClick}>{children}</ButtonStyled>;
+
+  const handleMouseUp = e => onClick(e);
+
+  return <ButtonStyled {...props} onMouseUp={handleMouseUp} >{children}</ButtonStyled>;
 }
 
 /* Props */
@@ -21,3 +24,8 @@ Button.propTypes = {
 Button.defaultProps = {
   type: POSITIVE,
 };
+
+
+/**
+ * 
+ */

@@ -3,9 +3,9 @@ A Simple Button
 import FlexRow from '../../../styles/UtilityComponents/FlexRow.js';
 
 <FlexRow>
-    <Button type='positive' onClick={() => alert('You clicked "positive"')}>Postive</Button>
-    <Button type='caution' onClick={() => alert('You clicked "caution"')}>Caution</Button>
-    <Button type='neutral' onClick={() => alert('You clicked "neutral"')}>Neutral</Button>
+    <Button type='positive' onClick={() => console.log('clicked "positive"')}>Positive</Button>
+    <Button type='caution' onClick={() => console.log('clicked "caution"')}>Caution</Button>
+    <Button type='neutral' onClick={() => console.log('clicked "neutral"')}>Neutral</Button>
 </FlexRow>
 
 ```
