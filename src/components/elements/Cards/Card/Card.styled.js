@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { borderRadius } from '../../../../styles/borders';
 import { keyAndAmbientShadows } from '../../../../styles/shadows';
 
 export const CardStyled = styled.div`
