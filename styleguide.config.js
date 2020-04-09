@@ -1,12 +1,8 @@
 const path = require("path");
+const sections = require('./styleguidist/sections');
 
 module.exports = {
-  components: "src/components/**/*.{js,jsx}",
-    ignore: [
-    '**/__tests__/**',
-    '**/*.test.{js,jsx,ts,tsx}',
-    '**/*.styled.{js,jsx,ts,tsx}',
-  ],
+  sections: sections,
   styles: {
     StyleGuide: {
       '@global body': {
