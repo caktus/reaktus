@@ -22,7 +22,7 @@ export const StyledModal = styled(motion.div)`
   z-index: 1000;
   width: 500px;
   height: 300px;
-  ${keyAndAmbientShadows.dp4};
+  ${keyAndAmbientShadows.dp6};
 `;
 
 
