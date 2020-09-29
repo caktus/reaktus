@@ -59,7 +59,7 @@ const Input = ({ label, icon, errors, className, ...props}) => {
               exit={{ height: 0, opacity: 0 }}
               transition={{delayChildren: 0.5}}
             >
-              {errors.map((error) => (
+              {errors && errors.map((error) => (
                 <ErrorStyled>
                   <ErrorIcon icon={faExclamationCircle} />
                   {error}

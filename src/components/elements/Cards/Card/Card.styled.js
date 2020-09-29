@@ -10,6 +10,10 @@ export const CardStyled = styled.div`
 
     transition: all 0.1s ease-in;
 
+    padding: 1rem;
+
+    cursor: ${props => props.onClick ? 'pointer' : 'default'};
+
     ${props => {
         if (props.onClick) {
             return css`
