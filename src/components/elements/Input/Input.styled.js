@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { colorWhite, colorPrimary, colorGrey, colorCaution } from "../../../styles/colors";
 import { motion } from "framer-motion";
 
 export const InputWrapper = styled.div`
@@ -12,31 +11,11 @@ export const InputWrapper = styled.div`
 
 
 export const LabelStyled = styled.label`
-    position: absolute;
-    top: 30%;
-    left: 15%;
-
-    letter-spacing: 0.7px;
-    font-family: inherit;
-    font-size: 0.8rem;
-
-    padding: 0;
-    background: transparent;
-    transition: all 0.2s ease-in-out, background 0.1s linear;
-
-    pointer-events: none;
-
-    color: ${props => props.hasErrors ? colorCaution : colorGrey};
-
-    ${(props) => {
-        if (props.labelTranslated) {
-            return css`
-              transform: translate(-10%, -125%) scale(0.8);
-              background: ${colorWhite};
-              padding: 0 0.4rem;
-            `;
-        }
-    }}
+  color: ${(props) => {
+    if (props.hasErrors) return props.theme.colorCaution;
+    if (props.hasFocus) return props.theme.colorPrimary;
+    return props.theme.colorBase;
+  }};
 `;
 
 export const IconStyled = styled(FontAwesomeIcon)`
@@ -44,26 +23,26 @@ export const IconStyled = styled(FontAwesomeIcon)`
 `;
 
 export const InputStyled = styled.input`
-    border-width: 2px;
-    border-style: solid;
-    border-color: ${props => props.hasErrors ? colorCaution : colorGrey};
-    border-radius: 3px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${(props) =>
+    props.hasErrors ? props.theme.colorCaution : props.theme.colorBase};
+  border-radius: 3px;
 
-    transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
-    &:focus {
-        border-color: ${colorPrimary};
-        & + label {
-            color: ${colorPrimary};
-        }
+  &:focus {
+    border-color: ${(props) => props.theme.colorPrimary};
+    & + label {
+      color: ${(props) => props.theme.colorPrimary};
     }
+  }
 
+  outline: none;
 
-    outline: none;
-
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: ${colorGrey};
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: ${(props) => props.theme.colorBase};
 `;
 
 
@@ -72,12 +51,12 @@ export const ErrorsStyled = styled(motion.div)`
 `;
 
 export const ErrorStyled = styled.p`
-    color: ${colorCaution};
+    color: ${props => props.theme.colorCaution};
     font-weight: bold;
     margin: 0 0 .5rem 0;
 `;
 
 export const ErrorIcon = styled(FontAwesomeIcon)`
-    color: ${colorCaution};
+    color: ${props => props.theme.colorCaution};
     margin-right: .5rem;
 `;

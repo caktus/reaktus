@@ -12,8 +12,8 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Input = ({ label, icon, errors, className, ...props}) => {
-    const [labelTranslated, setLabelTranslated] = useState(false);
+const Input = ({ label, icon, errors, theme, wrapperClassname, inputClassname, labelClassname, errorClassname, errorIcon, ...props}) => {
+    const [hasFocus, setHasFocus] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
 
     useEffect(() => {
@@ -23,48 +23,54 @@ const Input = ({ label, icon, errors, className, ...props}) => {
     },[errors, props.value])
 
     const handleBlur = e => {
-      if (e.target.value === '') setLabelTranslated(false);
+      if (e.target.value === '') setHasFocus(false);
     }
 
     const handleFocus = () => {
-      setLabelTranslated(true);
+      setHasFocus(true);
     }
 
 
     return (
       <>
-        <InputWrapper className={className}>
+        <InputWrapper theme={theme} className={wrapperClassname}>
           {icon && <IconStyled icon={icon} />}
-          <InputStyled
-            {...props}
-            hasErrors={hasErrors}
-            labelTranslated={labelTranslated}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
           {label && (
             <LabelStyled
+              theme={theme}
+              className={labelClassname}
               hasErrors={hasErrors}
-              labelTranslated={labelTranslated}
+              hasFocus={hasFocus}
             >
               {label}
             </LabelStyled>
           )}
+          <InputStyled
+            {...props}
+            theme={theme}
+            className={inputClassname}
+            hasErrors={hasErrors}
+            hasFocus={hasFocus}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
         </InputWrapper>
         <AnimatePresence>
           {hasErrors && (
             <ErrorsStyled
+              theme={theme}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{delayChildren: 0.5}}
+              transition={{ delayChildren: 0.5 }}
             >
-              {errors && errors.map((error) => (
-                <ErrorStyled>
-                  <ErrorIcon icon={faExclamationCircle} />
-                  {error}
-                </ErrorStyled>
-              ))}
+              {errors &&
+                errors.map((error) => (
+                  <ErrorStyled theme={theme} errorClassname={errorClassname}>
+                    <ErrorIcon icon={errorIcon || faExclamationCircle} />
+                    {error}
+                  </ErrorStyled>
+                ))}
             </ErrorsStyled>
           )}
         </AnimatePresence>
@@ -78,7 +84,7 @@ export const INPUT_TYPES = {
     PASSWORD: 'password',
     EMAIL: 'email'
 }
- 
+
 
 Input.propTypes = {
   /** \<Input\> is for basic text-type inputs */
@@ -87,10 +93,24 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   /** Inputs are fully controlled, so `onChange` is required */
   onChange: PropTypes.func.isRequired,
+  /** Inputs accept color settings */
+  theme: PropTypes.shape({
+    colorPrimary: PropTypes.string,
+    colorCaution: PropTypes.string,
+    colorSuccess: PropTypes.string,
+    colorWarning: PropTypes.string,
+    colorBase: PropTypes.string,
+  }),
 };
 
 Input.defaultProps = {
-  type: INPUT_TYPES.TEXT
+  type: INPUT_TYPES.TEXT,
+  theme: {
+    colorPrimary: "#89af5b",
+    colorCaution: "#b04846",
+    colorSuccess: "#89af5b",
+    colorBase: "#82908d",
+  },
 };
 
 export default Input;
