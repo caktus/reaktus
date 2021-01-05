@@ -1,12 +1,19 @@
 const theme = {
   /* Colors */
   colors: {
-    white: "#FFF",
-    grey: "#5C5C5C",
+    white: "#ffffff",
+    black: "#262626",
+    grey: "#82908d",
     lightgrey: "whitesmoke",
-    red: "#EF6F6C",
-    green: "#7FB685",
+    red: "#b04846",
+    green: "#89af5b",
     yellow: "#F2C57C",
+    blue: "#4082c3",
+
+    // aliased colors
+    primary: "#89af5b",
+    caution: "#b04846",
+    background: "#ffffff",
   },
 
   /* Layout, spacing */
