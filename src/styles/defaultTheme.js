@@ -14,6 +14,9 @@ const theme = {
     primary: "#89af5b",
     caution: "#b04846",
     background: "#ffffff",
+    disabled: "whitesmoke",
+    text: "#262626",
+    border: "#82908d",
   },
 
   /* Layout, spacing */

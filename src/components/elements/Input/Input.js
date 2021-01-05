@@ -1,82 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
-import {
-  InputWrapper,
-  InputStyled,
-  IconStyled,
-  LabelStyled,
-  ErrorsStyled,
-  ErrorStyled,
-  ErrorIcon,
-} from "./Input.styled";
+import * as Styled from "./Input.styled";
 import { AnimatePresence } from 'framer-motion';
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Input = ({ label, icon, errors, theme, wrapperClassname, inputClassname, labelClassname, errorClassname, errorIcon, ...props}) => {
-    const [hasFocus, setHasFocus] = useState(false);
-    const [hasErrors, setHasErrors] = useState(false);
+export const NORMAL = "normal";
+export const ERROR = "error";
+export const DISABLED = "disabled";
 
-    useEffect(() => {
-      if (props.value && errors && errors.length > 0) console.log('SHOW ERRORS')
-      if (props.value && errors && errors.length > 0) setHasErrors(true);
-      else setHasErrors(false);
-    },[errors, props.value])
+const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, ...props }, ref) => {
+  const inputRef = React.useRef();
 
-    const handleBlur = e => {
-      if (e.target.value === '') setHasFocus(false);
-    }
+  React.useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current.focus(),
+  }))
 
-    const handleFocus = () => {
-      setHasFocus(true);
-    }
+  const getVariant = () => {
+    if (variant) return variant;
+    if (errors?.length > 0) return ERROR;
+    if (props.disabled) return DISABLED;
+    else return NORMAL;
+  }
 
-
-    return (
-      <>
-        <InputWrapper theme={theme} className={wrapperClassname}>
-          {icon && <IconStyled icon={icon} />}
-          {label && (
-            <LabelStyled
-              theme={theme}
-              className={labelClassname}
-              hasErrors={hasErrors}
-              hasFocus={hasFocus}
-            >
-              {label}
-            </LabelStyled>
-          )}
-          <InputStyled
-            {...props}
-            theme={theme}
-            className={inputClassname}
-            hasErrors={hasErrors}
-            hasFocus={hasFocus}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-        </InputWrapper>
-        <AnimatePresence>
-          {hasErrors && (
-            <ErrorsStyled
-              theme={theme}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ delayChildren: 0.5 }}
-            >
-              {errors &&
-                errors.map((error) => (
-                  <ErrorStyled theme={theme} errorClassname={errorClassname}>
-                    <ErrorIcon icon={errorIcon || faExclamationCircle} />
-                    {error}
-                  </ErrorStyled>
-                ))}
-            </ErrorsStyled>
-          )}
-        </AnimatePresence>
-      </>
-    );
-}
+  return (
+    <Styled.InputWrapper>
+      {icon && <Styled.Icon icon={icon} variant={getVariant()} />}
+      <Styled.Input
+        variant={getVariant()}
+        ref={inputRef}
+        value={value}
+        onChange={onChange}
+        type={type}
+        errors={errors}
+      />
+    </Styled.InputWrapper>
+  );
+});
 
 export const INPUT_TYPES = {
     TEXT: 'text',
@@ -85,7 +44,6 @@ export const INPUT_TYPES = {
     EMAIL: 'email'
 }
 
-
 Input.propTypes = {
   /** \<Input\> is for basic text-type inputs */
   type: PropTypes.oneOf(Object.values(INPUT_TYPES)),
@@ -93,24 +51,50 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   /** Inputs are fully controlled, so `onChange` is required */
   onChange: PropTypes.func.isRequired,
-  /** Inputs accept color settings */
-  theme: PropTypes.shape({
-    colorPrimary: PropTypes.string,
-    colorCaution: PropTypes.string,
-    colorSuccess: PropTypes.string,
-    colorWarning: PropTypes.string,
-    colorBase: PropTypes.string,
-  }),
+  /** A list of error messages */
+  errors: PropTypes.arrayOf(PropTypes.string)
 };
 
 Input.defaultProps = {
   type: INPUT_TYPES.TEXT,
-  theme: {
-    colorPrimary: "#89af5b",
-    colorCaution: "#b04846",
-    colorSuccess: "#89af5b",
-    colorBase: "#82908d",
-  },
+};
+
+Input.Label = function({ errors, children }) {
+  return (
+    <Styled.Label errors={errors}>{children}</Styled.Label>
+  )
+}
+
+Input.Errors = function ({ errors, errorIcon }) {
+  return (
+    <AnimatePresence>
+      {errors?.length > 0 && (
+        <Styled.Errors
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ delayChildren: 0.5 }}
+        >
+          {errors?.map((error) => (
+            <Styled.Error key={error}>
+              <Styled.ErrorIcon icon={errorIcon || faExclamationCircle} />
+              {error}
+            </Styled.Error>
+          ))}
+        </Styled.Errors>
+      )}
+    </AnimatePresence>
+  );
 };
 
 export default Input;
+  /* {label && (
+            <LabelStyled
+              theme={theme}
+              className={labelClassname}
+              hasErrors={hasErrors}
+              hasFocus={hasFocus}
+            >
+              {label}
+            </LabelStyled>
+          )} */

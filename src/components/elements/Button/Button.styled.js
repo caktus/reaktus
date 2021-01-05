@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { POSITIVE, CAUTION, NEUTRAL } from "./Button";
 import { variant, space, layout, border, fontSize, boxShadow } from "styled-system";
 
 const ButtonStyled = styled("button")(

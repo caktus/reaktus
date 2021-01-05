@@ -12,4 +12,5 @@ const FlexRowStyled = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    margin-top: 1.5em;
 `;
