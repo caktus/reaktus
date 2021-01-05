@@ -1,48 +1,97 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { POSITIVE, CAUTION, NEUTRAL } from "./Button";
-import { keyAndAmbientShadows } from "../../../styles/shadows";
+import { variant, space, layout, border, fontSize, boxShadow } from "styled-system";
 
-export default styled.button`
-  cursor: pointer;
+const ButtonStyled = styled("button")(
+  {
+    transition: "all 0.1s ease-in",
+  },
+  space,
+  layout,
+  border,
+  fontSize,
+  boxShadow,
+  variant({
+    scale: "buttons",
+    variants: {
+      positive: {
+        color: "white",
+        bg: "primary",
+        borderColor: "primary",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'primary',
+          outlineOffset: "4px",
+        },
+      },
+      neutral: {
+        color: "primary",
+        bg: "white",
+        borderColor: "primary",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'primary',
+          outlineOffset: "4px",
+        },
+      },
+      caution: {
+        color: "white",
+        bg: "caution",
+        borderColor: "caution",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'caution',
+          outlineOffset: "4px",
+        },
+      },
+    },
+  })
+);
+ButtonStyled.propTypes = {
+  ...space.propTypes,
+  ...layout.propTypes,
+  ...border.propTypes,
+  ...fontSize.propTypes,
+  ...boxShadow.propTypes,
+};
+ButtonStyled.defaultProps = {
+  border: "standard",
+  borderRadius: "standard",
+  m: 0,
+  px: 3,
+  py: 2,
+  fontSize: 2,
+  maxHeight: 5,
+  boxShadow: "depth3",
+  variant: 'positive',
+};
 
-  ${({ type, theme }) => {
-    if (type === POSITIVE) return css`
-      background: ${theme.colorPrimary};
-      border: 1px solid ${theme.colorPrimary};
-      color: #fff;
-    `;
+export default ButtonStyled;
 
-    if (type === CAUTION) return css`
-      background: ${theme.colorCaution};
-      border: 1px solid ${theme.colorCaution};
-      color: #fff;
-    `;
-
-    if (type === NEUTRAL) return css`
-      background: #fff;
-      border: 1px solid ${theme.colorPrimary};
-      color: ${theme.colorPrimary};
-    `;
-
-  }}
-
-  border-radius: 3px;
-  font-size: 1rem;
-  padding: 0.5rem 1.5rem;
-  outline: none;
-
-  transition: all 0.1s ease-in;
-
-  ${keyAndAmbientShadows.dp2};
-
-  &:hover {
-    ${keyAndAmbientShadows.dp6};
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    ${keyAndAmbientShadows.dp2};
-    transform: translateY(1px);
-    /* transform: translate(0, 0); */
-  }
-`;
