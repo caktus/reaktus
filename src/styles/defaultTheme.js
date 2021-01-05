@@ -31,6 +31,7 @@ const theme = {
   radii: {
     none: 0,
     standard: 5,
+    rounded: 20,
   },
 
   /* Shadows */
