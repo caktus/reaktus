@@ -8,24 +8,6 @@ module.exports = [
   {
     content: 'docs/introduction.md'
   },
-  // {
-  //   name: 'Documentation',
-  //   sections: [
-  //     {
-  //       name: 'Installation',
-  //       content: 'docs/installation.md',
-  //     },
-  //     {
-  //       name: 'Configuration',
-  //       content: 'docs/configuration.md'
-  //     },
-  //     {
-  //       name: 'Live Demo',
-  //       external: true,
-  //       href: 'https://www.google.com'
-  //     }
-  //   ]
-  // },
   {
     name: 'UI Components',
     content: 'docs/ui.md',
