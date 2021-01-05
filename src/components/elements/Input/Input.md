@@ -10,8 +10,8 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [errors, setErrors] = useState({});
 
-
-<FlexCol>
+// <FlexCol>
+<>
     <Input 
         type="text" 
         value={email} 
@@ -32,5 +32,6 @@ const [errors, setErrors] = useState({});
     />
 
     <Button onClick={() => setErrors({ password: ['Invalid credentials']})}>Log In</Button>
-</FlexCol>
+</>
+// </FlexCol>
 ```
