@@ -1,4 +1,4 @@
-const Button = require("components/elements/Button/Button")['default'];
+const Button = require("components/elements/Button/Button");
 const POSITIVE = require("components/elements/Button/Button")['POSITIVE'];
 const CAUTION = require("components/elements/Button/Button")["POSITIVE"];
 const NEUTRAL = require("components/elements/Button/Button")["NEUTRAL"];
