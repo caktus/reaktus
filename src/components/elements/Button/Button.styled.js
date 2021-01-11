@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { variant, space, layout, border, fontSize, boxShadow } from "styled-system";
+import { variant, space, layout, border, fontSize, boxShadow, typography } from "styled-system";
 
 const ButtonStyled = styled("button")(
   {
     transition: "all 0.1s ease-in",
   },
-  space,
-  layout,
-  border,
-  fontSize,
-  boxShadow,
   variant({
     scale: "buttons",
     variants: {
@@ -28,7 +23,7 @@ const ButtonStyled = styled("button")(
         "&:focus": {
           outline: "2px solid",
           outlineBorderRadius: "standard",
-          outlineColor: 'primary',
+          outlineColor: "primary",
           outlineOffset: "4px",
         },
       },
@@ -47,7 +42,7 @@ const ButtonStyled = styled("button")(
         "&:focus": {
           outline: "2px solid",
           outlineBorderRadius: "standard",
-          outlineColor: 'primary',
+          outlineColor: "primary",
           outlineOffset: "4px",
         },
       },
@@ -66,19 +61,28 @@ const ButtonStyled = styled("button")(
         "&:focus": {
           outline: "2px solid",
           outlineBorderRadius: "standard",
-          outlineColor: 'caution',
+          outlineColor: "caution",
           outlineOffset: "4px",
         },
       },
     },
-  })
+  }),
+  color,
+  border,
+  boxShadow,
+  space,
+  layout,
+  fontSize,
+  typography
 );
 ButtonStyled.propTypes = {
+  ...color.propTypes,
   ...space.propTypes,
   ...layout.propTypes,
   ...border.propTypes,
   ...fontSize.propTypes,
   ...boxShadow.propTypes,
+  ...typography.propTypes,
 };
 ButtonStyled.defaultProps = {
   border: "standard",
