@@ -24,3 +24,8 @@ When <strong>using</strong> Reaktus, here are some examples of how you can make 
   OR they can refer to standard values:
 
   `<Button variant="primary" borderRadius="5px">Oh hey</Button>`
+
+  ```jsx
+
+  return <Card>Oh hey</Card>
+  ```
