@@ -11,7 +11,7 @@ npm i reaktus styled-components
 ```javascript
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Input } from 'reaktus';
+import { Button, POSITIVE, Input } from 'reaktus';
 
 function MyForm() {
     const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ function MyForm() {
         <form>
             <Input type='email' value={email} onChange={e => setEmail(e.target.value)} label="Email" />
             <Input type='password' value={password} onChange={e => setPassword(e.target.value)} label="Password" />
-            <Button type='positive' onClick={() => alert('Not really logging in.')}>Log in!</Button>
+            <Button variant={POSITIVE} onClick={() => alert('Not really logging in.')}>Log in!</Button>
         </form>
     )
 }
