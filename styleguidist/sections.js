@@ -6,35 +6,39 @@ const ignore = [
 
 module.exports = [
   {
-    content: 'docs/introduction.md'
+    content: "docs/introduction.md",
   },
   {
-    name: 'UI Components',
-    content: 'docs/ui.md',
+    name: "Reaktus is Themeable!",
+    content: "docs/themeable.md",
+  },
+  {
+    name: "UI Components",
+    content: "docs/ui.md",
     sections: [
       {
-        name: 'Elements',
-        components: 'src/components/elements/**/*.{js,jsx}',
-        ignore: ignore
+        name: "Elements",
+        components: "src/components/elements/**/*.{js,jsx}",
+        ignore: ignore,
       },
       {
-        name: 'Modals',
-        components: 'src/components/modals/**/*.{js,jsx}',
-        ignore: ignore
+        name: "Modals",
+        components: "src/components/modals/**/*.{js,jsx}",
+        ignore: ignore,
       },
       {
-        name: 'Collections',
-        components: 'src/components/collections/**/*.{js,jsx}',
-        ignore: ignore
-      }
+        name: "Collections",
+        components: "src/components/collections/**/*.{js,jsx}",
+        ignore: ignore,
+      },
     ],
-    exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-    usageMode: 'collapse' // 'hide' | 'collapse' | 'expand'
+    exampleMode: "expand", // 'hide' | 'expand' | 'expand'
+    usageMode: "expand", // 'hide' | 'collapse' | 'expand'
   },
   {
-    name: 'Hooks',
-    content: 'docs/hooks.md',
-    components: 'src/hooks/**/*.{js,jsx}',
-    ignore: ignore
-  }
-]
+    name: "Hooks",
+    content: "docs/hooks.md",
+    components: "src/hooks/**/*.{js,jsx}",
+    ignore: ignore,
+  },
+];
