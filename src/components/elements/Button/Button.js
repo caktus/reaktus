@@ -16,16 +16,7 @@ export const NEUTRAL = "neutral";
 
 Button.propTypes = {
   /** Reflects the state of the button */
-  type: PropTypes.oneOf([POSITIVE, CAUTION, NEUTRAL]),
+  variant: PropTypes.oneOf([POSITIVE, CAUTION, NEUTRAL]),
   /** What happens when the button is clicked */
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,  
 };
-
-Button.defaultProps = {
-  type: POSITIVE,
-};
-
-
-/**
- * 
- */

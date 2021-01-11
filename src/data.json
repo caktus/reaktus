@@ -1,0 +1,247 @@
+[
+  {
+    "id": 1,
+    "name": "Simi Valley",
+    "state": "California"
+  },
+  {
+    "id": 2,
+    "name": "Roanoke",
+    "state": "Virginia"
+  },
+  {
+    "id": 4,
+    "name": "North Little Rock",
+    "state": "Arkansas"
+  },
+  {
+    "id": 5,
+    "name": "Los Angeles",
+    "state": "California"
+  },
+  {
+    "id": 6,
+    "name": "Cincinnati",
+    "state": "Ohio"
+  },
+  {
+    "id": 7,
+    "name": "Wichita Falls",
+    "state": "Texas"
+  },
+  {
+    "id": 8,
+    "name": "Raleigh",
+    "state": "North Carolina"
+  },
+  {
+    "id": 9,
+    "name": "Durham",
+    "state": "North Carolina"
+  },
+  {
+    "id": 10,
+    "name": "Toledo",
+    "state": "Ohio"
+  },
+  {
+    "id": 11,
+    "name": "Levittown",
+    "state": "Pennsylvania"
+  },
+  {
+    "id": 12,
+    "name": "Riverside",
+    "state": "California"
+  },
+  {
+    "id": 13,
+    "name": "San Antonio",
+    "state": "Texas"
+  },
+  {
+    "id": 14,
+    "name": "Sacramento",
+    "state": "California"
+  },
+  {
+    "id": 15,
+    "name": "Glendale",
+    "state": "California"
+  },
+  {
+    "id": 16,
+    "name": "Saint Louis",
+    "state": "Missouri"
+  },
+  {
+    "id": 17,
+    "name": "Washington",
+    "state": "District of Columbia"
+  },
+  {
+    "id": 18,
+    "name": "Jamaica",
+    "state": "New York"
+  },
+  {
+    "id": 19,
+    "name": "Jackson",
+    "state": "Mississippi"
+  },
+  {
+    "id": 20,
+    "name": "Bradenton",
+    "state": "Florida"
+  },
+  {
+    "id": 21,
+    "name": "Indianapolis",
+    "state": "Indiana"
+  },
+  {
+    "id": 22,
+    "name": "Chicago",
+    "state": "Illinois"
+  },
+  {
+    "id": 23,
+    "name": "Seminole",
+    "state": "Florida"
+  },
+  {
+    "id": 24,
+    "name": "Saint Petersburg",
+    "state": "Florida"
+  },
+  {
+    "id": 25,
+    "name": "Dallas",
+    "state": "Texas"
+  },
+  {
+    "id": 26,
+    "name": "Miami",
+    "state": "Florida"
+  },
+  {
+    "id": 27,
+    "name": "Vancouver",
+    "state": "Washington"
+  },
+  {
+    "id": 28,
+    "name": "Miami",
+    "state": "Florida"
+  },
+  {
+    "id": 29,
+    "name": "Roanoke",
+    "state": "Virginia"
+  },
+  {
+    "id": 30,
+    "name": "Tucson",
+    "state": "Arizona"
+  },
+  {
+    "id": 31,
+    "name": "Portsmouth",
+    "state": "Virginia"
+  },
+  {
+    "id": 32,
+    "name": "Austin",
+    "state": "Texas"
+  },
+  {
+    "id": 33,
+    "name": "Topeka",
+    "state": "Kansas"
+  },
+  {
+    "id": 34,
+    "name": "Peoria",
+    "state": "Illinois"
+  },
+  {
+    "id": 35,
+    "name": "Richmond",
+    "state": "Virginia"
+  },
+  {
+    "id": 36,
+    "name": "Riverside",
+    "state": "California"
+  },
+  {
+    "id": 37,
+    "name": "Chattanooga",
+    "state": "Tennessee"
+  },
+  {
+    "id": 38,
+    "name": "Raleigh",
+    "state": "North Carolina"
+  },
+  {
+    "id": 39,
+    "name": "Washington",
+    "state": "District of Columbia"
+  },
+  {
+    "id": 40,
+    "name": "Portsmouth",
+    "state": "New Hampshire"
+  },
+  {
+    "id": 41,
+    "name": "Toledo",
+    "state": "Ohio"
+  },
+  {
+    "id": 42,
+    "name": "Miami",
+    "state": "Florida"
+  },
+  {
+    "id": 43,
+    "name": "Birmingham",
+    "state": "Alabama"
+  },
+  {
+    "id": 44,
+    "name": "Washington",
+    "state": "District of Columbia"
+  },
+  {
+    "id": 45,
+    "name": "Oklahoma City",
+    "state": "Oklahoma"
+  },
+  {
+    "id": 46,
+    "name": "Greensboro",
+    "state": "North Carolina"
+  },
+  {
+    "id": 47,
+    "name": "El Paso",
+    "state": "Texas"
+  },
+  {
+    "id": 48,
+    "name": "Austin",
+    "state": "Texas"
+  },
+  {
+    "id": 49,
+    "name": "Newton",
+    "state": "Massachusetts"
+  },
+  {
+    "id": 50,
+    "name": "Knoxville",
+    "state": "Tennessee"
+  }
+]

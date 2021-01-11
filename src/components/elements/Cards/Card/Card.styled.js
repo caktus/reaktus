@@ -1,27 +1,55 @@
-import styled, { css } from 'styled-components';
-import { keyAndAmbientShadows } from '../../../../styles/shadows';
+import styled from 'styled-components';
+import {
+  layout,
+  position,
+  size,
+  boxShadow,
+  color,
+  border,
+  variant,
+} from "styled-system";
 
-export const CardStyled = styled.div`
-    min-height: 20rem;
-    min-width: 15rem;
-    border-radius: 20px;
-    ${keyAndAmbientShadows.dp6};
+export const Card = styled.div`
+  ${size};
+  ${position};
+  ${layout};
+  ${boxShadow};
+  ${color};
+  ${border}
 
-    transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
 
-    ${props => {
-        if (props.onClick) {
-            return css`
-                &:hover {
-                    transform: translateY(-1px);
-                    ${keyAndAmbientShadows.dp12}
-                }
-
-                &:active {
-                    transform: translateY(1px);
-                    ${keyAndAmbientShadows.dp2}
-                }
-            `;
-        }
-    }}
+  ${variant({
+    variants: {
+      normal: {
+        boxShadow: "depth3",
+      },
+      interactive: {
+        cursor: "pointer",
+        boxShadow: "depth3",
+        "&:hover": {
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+        },
+      },
+    },
+  })}
 `;
+Card.propTypes = {
+  ...size.propTypes,
+  ...position.propTypes,
+  ...layout.propTypes,
+  ...boxShadow.propTypes,
+  ...color.propTypes,
+  ...border.propTypes,
+}
+Card.defaultProps = {
+  p: 2,
+  minHeight: 5,
+  minWidth: 4,
+  border: 'none',
+  borderRadius: '20px',
+  variant: 'normal'
+};

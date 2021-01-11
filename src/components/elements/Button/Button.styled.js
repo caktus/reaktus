@@ -1,99 +1,96 @@
 import styled from "styled-components";
-import * as states from "../../../styles/states";
-import { POSITIVE, CAUTION, NEUTRAL } from "./Button";
-import { keyAndAmbientShadows } from "../../../styles/shadows";
+import { variant, space, layout, border, fontSize, boxShadow } from "styled-system";
 
-export default styled.button`
-  cursor: pointer;
-  ${({ type }) => mapTypeToStartingState(type)}
+const ButtonStyled = styled("button")(
+  {
+    transition: "all 0.1s ease-in",
+  },
+  space,
+  layout,
+  border,
+  fontSize,
+  boxShadow,
+  variant({
+    scale: "buttons",
+    variants: {
+      positive: {
+        color: "white",
+        bg: "primary",
+        borderColor: "primary",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'primary',
+          outlineOffset: "4px",
+        },
+      },
+      neutral: {
+        color: "primary",
+        bg: "white",
+        borderColor: "primary",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'primary',
+          outlineOffset: "4px",
+        },
+      },
+      caution: {
+        color: "white",
+        bg: "caution",
+        borderColor: "caution",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "depth4",
+        },
+        "&:active": {
+          boxShadow: "depth2",
+          transform: "translateY(1px)",
+        },
+        "&:focus": {
+          outline: "2px solid",
+          outlineBorderRadius: "standard",
+          outlineColor: 'caution',
+          outlineOffset: "4px",
+        },
+      },
+    },
+  })
+);
+ButtonStyled.propTypes = {
+  ...space.propTypes,
+  ...layout.propTypes,
+  ...border.propTypes,
+  ...fontSize.propTypes,
+  ...boxShadow.propTypes,
+};
+ButtonStyled.defaultProps = {
+  border: "standard",
+  borderRadius: "standard",
+  m: 0,
+  px: 3,
+  py: 2,
+  fontSize: 2,
+  maxHeight: 5,
+  boxShadow: "depth3",
+  variant: 'positive',
+};
 
-  border-radius: 3px;
-  font-size: 1rem;
-  padding: 0.5rem 1.5rem;
-  outline: none;
+export default ButtonStyled;
 
-  transition: all 0.1s ease-in;
-
-  ${keyAndAmbientShadows.dp2};
-
-  &:hover {
-    ${keyAndAmbientShadows.dp6};
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    ${keyAndAmbientShadows.dp2};
-    transform: translateY(1px);
-    /* transform: translate(0, 0); */
-  }
-`;
-
-function mapTypeToStartingState(type) {
-  switch (type) {
-    case POSITIVE:
-      return states.positive;
-    case CAUTION:
-      return states.caution;
-    case NEUTRAL:
-      return states.neutral;
-    default:
-      return states.positive;
-  }
-}
-// .btn {
-//   position: relative;
-
-//   overflow: hidden;
-
-//   // border-width: 0;
-//   // outline: none;
-//   // border-radius: 2px;
-//   // box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-  
-//   // background-color: #2ecc71;
-//   // color: #ecf0f1;
-  
-//   transition: background-color .3s;
-// }
-
-// .btn:hover, .btn:focus {
-//   background-color: #27ae60;
-// }
-
-// .btn > * {
-//   position: relative;
-// }
-
-// .btn span {
-//   display: block;
-//   padding: 12px 24px;
-// }
-
-// .btn:before {
-//   content: "";
-  
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-  
-//   display: block;
-//   width: 0;
-//   padding-top: 0;
-    
-//   border-radius: 100%;
-  
-//   background-color: rgba(236, 240, 241, .3);
-  
-//   -webkit-transform: translate(-50%, -50%);
-//   -moz-transform: translate(-50%, -50%);
-//   -ms-transform: translate(-50%, -50%);
-//   -o-transform: translate(-50%, -50%);
-//   transform: translate(-50%, -50%);
-// }
-
-// .btn:active:before {
-//   width: 120%;
-//   padding-top: 120%;
-  
-//   transition: width .2s ease-out, padding-top .2s ease-out;
-// }
