@@ -17,7 +17,7 @@ It aspires to be fully WAI compliant one day, but isn't quite there yet.
     padding: '1em',
     color: 'steelblue',
     textDecoration: 'underline',
-    border: '1px solid grey',
+    borderTop: '1px solid grey',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

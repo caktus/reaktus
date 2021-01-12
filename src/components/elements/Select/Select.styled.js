@@ -44,7 +44,8 @@ Input.defaultProps = {
 }
 
 export const Dropdown = styled.div`
-  display: ${props => props.showContainer ? 'block' : 'none'};
+  display: ${props => props.showContainer ? 'flex' : 'none'};
+  flex-direction: column;
   position: absolute;
   ${({ containerPosition }) => {
     switch (containerPosition) {
@@ -110,7 +111,6 @@ OptionsList.defaultProps = {
   m: 0,
   p: 0,
   bg: "white",
-  maxHeight: 5,
 };
 
 
