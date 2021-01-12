@@ -5,12 +5,54 @@ Add some values and click "Log In" to see validation!
   import React, { useState } from 'react';
   import Button from '../Button/Button';
   import FlexRow from '../../../styles/UtilityComponents/FlexRow.js';
+  import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
   const wrapperStyles = {
     display: 'flex',
     flexDirection: 'column',
     width: 200,
+  }
+
+  const customIconStyles = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: '#82908d',
+    height: '100%',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    width: 33,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
+  const customIconWithFocus = {
+    ...customIconStyles,
+    background: "#89af5b",
+  }
+
+  const errorIconWithFocus = {
+    ...customIconStyles,
+    background: "#b04846",
+  }
+
+  const disabledIconWithFocus = {
+    ...customIconStyles,
+    background: "whitesmoke",
+  }
+
+  const _getIconStyles = (hasFocus, variant) => {
+    console.log("hey itsa gettin stylesa")
+    if (variant === 'normal') return hasFocus ? customIconWithFocus : customIconStyles
+    if (variant === 'error') return errorIconWithFocus;
+    if (variant === 'disabled') return disabledIconWithFocus
+    else return {}
+  }
+
+  const CustomIcon = ({ hasFocus, variant }) => {
+    return <div style={_getIconStyles(hasFocus, variant)}><FontAwesomeIcon style={{ color: 'white' }} icon={faLock} /></div>
   }
 
   const [email, setEmail] = useState('');
@@ -40,7 +82,8 @@ Add some values and click "Log In" to see validation!
         type="password" 
         value={password} 
         label="password"
-        icon={faLock}
+        icon={props => <CustomIcon {...props}/>}
+        pl="6"
         errors={errors.password}
         onChange={e => {
             setPassword(e.target.value)
