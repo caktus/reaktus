@@ -37,7 +37,7 @@ export const Icon = styled(FontAwesomeIcon)(
     scale: "inputStates",
     variants: {
       normal: {
-        color: "border",
+        color: props => props.hasFocus ? "primary" : "border",
       },
       error: {
         color: "caution",

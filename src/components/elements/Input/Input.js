@@ -10,10 +10,14 @@ export const DISABLED = "disabled";
 
 const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, ...props }, ref) => {
   const inputRef = React.useRef();
+  const [hasFocus, setHasFocus] = React.useState(false);
 
   React.useImperativeHandle(ref, () => ({
     focus: () => inputRef.current.focus(),
   }))
+
+  const _handleFocus = () => setHasFocus(true);
+  const _handleBlur = () => setHasFocus(false);
 
   const getVariant = () => {
     if (variant) return variant;
@@ -22,16 +26,25 @@ const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, 
     else return NORMAL;
   }
 
+  const renderIcon = (focused, variant) => {
+    if (!icon) return null;
+    if (typeof icon === "function") return icon({ hasFocus: focused , variant });
+    if (typeof icon === "object") return <Styled.Icon icon={icon} hasFocus={hasFocus} variant={variant} />;
+  }
+
   return (
     <Styled.InputWrapper>
-      {icon && <Styled.Icon icon={icon} variant={getVariant()} />}
+      {renderIcon(hasFocus, getVariant())}
       <Styled.Input
         variant={getVariant()}
         ref={inputRef}
         value={value}
         onChange={onChange}
+        onFocus={_handleFocus}
+        onBlur={_handleBlur}
         type={type}
         errors={errors}
+        {...props}
       />
     </Styled.InputWrapper>
   );
@@ -59,13 +72,13 @@ Input.defaultProps = {
   type: INPUT_TYPES.TEXT,
 };
 
-Input.Label = function({ errors, children }) {
+Input.Label = function({ errors, children, ...props }) {
   return (
-    <Styled.Label errors={errors}>{children}</Styled.Label>
+    <Styled.Label errors={errors} {...props}>{children}</Styled.Label>
   )
 }
 
-Input.Errors = function ({ errors, errorIcon }) {
+Input.Errors = function ({ errors, errorIcon, ...props }) {
   return (
     <AnimatePresence>
       {errors?.length > 0 && (
@@ -74,6 +87,7 @@ Input.Errors = function ({ errors, errorIcon }) {
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ delayChildren: 0.5 }}
+          {...props}
         >
           {errors?.map((error) => (
             <Styled.Error key={error}>
@@ -88,13 +102,3 @@ Input.Errors = function ({ errors, errorIcon }) {
 };
 
 export default Input;
-  /* {label && (
-            <LabelStyled
-              theme={theme}
-              className={labelClassname}
-              hasErrors={hasErrors}
-              hasFocus={hasFocus}
-            >
-              {label}
-            </LabelStyled>
-          )} */
