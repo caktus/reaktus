@@ -4,9 +4,9 @@ import ButtonStyled from './Button.styled';
 
 export default function Button({ children, onClick, ...props }) {
 
-  const handleMouseUp = e => onClick(e);
+  const handleClick = e => onClick(e);
 
-  return <ButtonStyled {...props} onMouseUp={handleMouseUp} >{children}</ButtonStyled>;
+  return <ButtonStyled {...props} onClick={handleClick} >{children}</ButtonStyled>;
 }
 
 /* Props */
