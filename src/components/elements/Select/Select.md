@@ -1,7 +1,8 @@
 A Select component build from composable UI primitives.
   
 It aspires to be fully WAI compliant one day, but isn't quite there yet.
-```jsx noeditor
+
+```jsx
   import React from 'react';
   import data from '../../../data.json';
 
@@ -75,6 +76,63 @@ It aspires to be fully WAI compliant one day, but isn't quite there yet.
         >
           <p>Because I'm composed of primitives, you can add arbitrary JSX any old place. Click Me!</p>
         </div>
+      </Select.Dropdown>
+    </Select.InputContainer>
+  </Select>
+```
+
+
+Swappable input component:
+
+```jsx
+  import React from 'react';
+  import Input from '../Input/Input';
+  import data from '../../../data.json';
+
+  const optionStyles = {
+    width: '100%',
+    padding: '1em .5em',
+    margin: 0.
+  }
+
+  const filterOption = (value, option) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return option.name.toLowerCase().slice(0, inputLength) === inputValue
+  }
+
+  <Select
+    onSelection={(c) => setCity(c)}
+    filterOption={filterOption}
+    labelAccessor="name"
+  >
+    <Select.Label color="white" py={2} display="block">
+      Cities
+    </Select.Label>
+    <Select.InputContainer>
+      <Select.Input renderInput={() => <Input />} />
+      <Select.Dropdown
+        boxShadow="depth5"
+        border="none"
+        borderColor="grey"
+      >
+        <Select.OptionsList>
+          {data.map((city) => (
+            <Select.Option
+              key={city.id}
+              value={city.id}
+              option={city}
+              css={{
+                "&:hover": {
+                  background: "black",
+                },
+              }}
+            >
+              <div style={optionStyles}>{city.name}</div>
+            </Select.Option>
+          ))}
+        </Select.OptionsList>
       </Select.Dropdown>
     </Select.InputContainer>
   </Select>

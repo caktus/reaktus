@@ -47,6 +47,7 @@ export const Dropdown = styled.div`
   display: ${props => props.showContainer ? 'flex' : 'none'};
   flex-direction: column;
   position: absolute;
+  z-index: 99;
   ${({ containerPosition }) => {
     switch (containerPosition) {
       case TOP: return css`
