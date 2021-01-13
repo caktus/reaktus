@@ -8,7 +8,7 @@ export const NORMAL = "normal";
 export const ERROR = "error";
 export const DISABLED = "disabled";
 
-const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, ...props }, ref) => {
+const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, onFocus: innerFocus, onBlur: innerBlur, ...props }, ref) => {
   const inputRef = React.useRef();
   const [hasFocus, setHasFocus] = React.useState(false);
 
@@ -16,8 +16,14 @@ const Input = React.forwardRef(({ value, onChange, errors, type, icon, variant, 
     focus: () => inputRef.current.focus(),
   }))
 
-  const _handleFocus = () => setHasFocus(true);
-  const _handleBlur = () => setHasFocus(false);
+  const _handleFocus = e => {
+    if (innerFocus) innerFocus(e);
+    setHasFocus(true)
+  }
+  const _handleBlur = (e) => {
+    if (innerBlur) innerBlur(e);
+    setHasFocus(false)
+  }
 
   const getVariant = () => {
     if (variant) return variant;

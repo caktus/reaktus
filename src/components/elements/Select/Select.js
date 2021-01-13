@@ -23,17 +23,16 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
     const [selectedOption, setSelectedOption] = useState('');
     const [inputValue, setInputValue] = useState('');
 
-    useEffect(() => {
-        function _toggleOpenOnFocus(e) {
-            e.stopPropagation()
-            const inputEl = e.target.closest("input");
-            const targetIsInput = inputEl && inputEl === inputRef.current;
-            if (targetIsInput) setShowContainer(true)
-            else setShowContainer(false)
-        }
-        document.addEventListener("click", _toggleOpenOnFocus)
-        return () => document.removeEventListener('click', _toggleOpenOnFocus)
-    }, [inputRef, containerRef])
+    const handleInputFocus = () => {
+      setShowContainer(true)
+    }
+
+    const handleInputBlur = e => {
+      // relatedTarget will be one of the optionsRefs if we're trying to change focus to container
+      if (!optionRefs.current.includes(e.relatedTarget)) {
+        setShowContainer(false);
+      }
+    }
 
     /* Exposed via imperitiveHandle */
     const _closeDropdown = () => setShowContainer(false);
@@ -55,11 +54,10 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
     }
 
     /* Handling various keypress events */
-
     const _setFocusToContainer = () => {
-        if (optionRefs.current[0]) {
-          optionRefs.current[0].focus()
-        }
+      if (optionRefs.current[0]) {
+        optionRefs.current[0].focus()
+      }
     }
 
     const _handleInputArrowDown = () => {
@@ -68,10 +66,6 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
         // set focus to selected element
         _setFocusToContainer();
     }
-
-    // const _handleInputArrowUp = () => {
-    //     setShowContainer(false);
-    // }
 
     const _getIndexOfOption = (option) => {
       const options = optionRefs.current;
@@ -119,10 +113,6 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
       if (key === "ArrowUp") _handleOptionArrowUp(target, e);
     }
 
-    // useEffect(() => {
-    //     console.log('optionRefs ', optionRefs)
-    // }, [optionRefs])
-
     return (
         <SelectContext.Provider value={{
             showContainer,
@@ -136,7 +126,9 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
             filterOption,
             handleKeyPressedInInput,
             handleKeyPressedOnOption,
-            optionRefs
+            optionRefs,
+            handleInputFocus,
+            handleInputBlur,
         }}>
             <Styled.Wrapper {...props}>
                 {children}
@@ -162,18 +154,39 @@ Select.InputContainer = function InputContainer({ children, ...props }) {
     )
 }
 
-Select.Input = function Input({ children, ...props }) {
-    const { inputRef, inputValue, handleSetInputValue, handleKeyPressedInInput } = useContext(SelectContext)
+Select.Input = function Input({ children, renderInput, ...props }) {
+    const { 
+      inputRef, 
+      inputValue, 
+      handleSetInputValue, 
+      handleKeyPressedInInput,
+      handleInputFocus,
+      handleInputBlur
+    } = useContext(SelectContext)
+
+    if (renderInput) {
+      return React.cloneElement(renderInput(), { 
+        value: inputValue, 
+        onChange: e => handleSetInputValue(e.target.value), 
+        onKeyDown: handleKeyPressedInInput, 
+        ref: inputRef ,
+        onFocus: handleInputFocus,
+        onBlur: handleInputBlur,
+        ...props,
+      })
+    }
 
     return (
-        <Styled.Input
-            {...props}
-            value={inputValue}
-            onChange={e => handleSetInputValue(e.target.value)}
-            onKeyDown={handleKeyPressedInInput}
-            ref={inputRef}
-        />
-    )
+      <Styled.Input
+        {...props}
+        value={inputValue}
+        onChange={(e) => handleSetInputValue(e.target.value)}
+        onKeyDown={handleKeyPressedInInput}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        ref={inputRef}
+      />
+    );
 }
 
 Select.Input.propTypes = {
@@ -213,8 +226,7 @@ Select.OptionsList = function OptionsList({ children }) {
   const { optionRefs } = useContext(
     SelectContext
   );
-  // const optionRefs = React.useRef([]);
-  // console.log('optionRefs: ', optionRefs)
+
   return (
     <Styled.OptionsList >
       {React.Children.map(children, (child, i) =>
@@ -226,21 +238,6 @@ Select.OptionsList = function OptionsList({ children }) {
 
 Select.Option = React.forwardRef(({ option, children, ...props }, ref) => {
     const { handleOptionSelected, inputValue, filterOption, handleKeyPressedOnOption } = useContext(SelectContext)
-
-    // useEffect(() => {
-    //     console.log('optionRef', optionRef);
-    //     console.log('optionRefs', optionRefs)
-    //     if (optionRef && !optionRefs?.current.includes(optionRef)) {
-    //         console.log('it is not in there, so add it!')
-    //         optionRefs.push(optionRef)
-    //     }
-    // }, [optionRef, optionRefs])
-
-    // const _setRef = ref => {
-    //     if (!optionRefs.current.find(r => r === ref?.current)) {
-    //         optionRefs.current.push(ref)
-    //     }
-    // }
 
     const _handleKeyDown = (event) => {
       if (event.key === 'Enter') return

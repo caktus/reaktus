@@ -25,7 +25,3 @@ When <strong>using</strong> Reaktus, here are some examples of how you can make 
 
   `<Button variant="primary" borderRadius="5px">Oh hey</Button>`
 
-  ```jsx
-
-  return <Card>Oh hey</Card>
-  ```

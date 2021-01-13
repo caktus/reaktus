@@ -44,7 +44,6 @@ Add some values and click "Log In" to see validation!
   }
 
   const _getIconStyles = (hasFocus, variant) => {
-    console.log("hey itsa gettin stylesa")
     if (variant === 'normal') return hasFocus ? customIconWithFocus : customIconStyles
     if (variant === 'error') return errorIconWithFocus;
     if (variant === 'disabled') return disabledIconWithFocus
