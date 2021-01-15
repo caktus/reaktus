@@ -102,8 +102,13 @@ Swappable input component:
     return option.name.toLowerCase().slice(0, inputLength) === inputValue
   }
 
+  const handleDropdownChange = open => {
+    console.log('dropdown changed! Is it open? ', open)
+  }
+
   <Select
     onSelection={(c) => setCity(c)}
+    onDropdownChange={handleDropdownChange}
     filterOption={filterOption}
     labelAccessor="name"
   >

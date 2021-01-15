@@ -14,14 +14,21 @@ import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 
 const SelectContext = createContext();
 
-const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption, ...props }, ref) => {
+const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownChange, filterOption, ...props }, ref) => {
     const containerRef = createRef();
     const inputRef = createRef();
     const optionRefs = useRef([]);
 
-    const [showContainer, setShowContainer] = useState(false);
+    const [showContainer, setShowContainer] = useState();
     const [selectedOption, setSelectedOption] = useState('');
     const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+      // if (!onDropdownChange) return
+      if (onDropdownChange && showContainer === true || showContainer === false) {
+        onDropdownChange(showContainer);
+      }
+    }, [showContainer])
 
     const handleInputFocus = () => {
       setShowContainer(true)
@@ -139,8 +146,10 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, filterOption,
 });
 
 Select.propTypes = {
-    onSelection: PropTypes.func.isRequired,
-}
+  onSelection: PropTypes.func,
+  /** Fires when dropdown opens or closes  */
+  onDropdownChange: PropTypes.func,
+};
 
 Select.Label = function Label({ children, ...props }) {
     return (

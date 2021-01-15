@@ -66,10 +66,8 @@ export const INPUT_TYPES = {
 Input.propTypes = {
   /** \<Input\> is for basic text-type inputs */
   type: PropTypes.oneOf(Object.values(INPUT_TYPES)),
-  /** Inputs are fully controlled, so `value` is required */
-  value: PropTypes.string.isRequired,
-  /** Inputs are fully controlled, so `onChange` is required */
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   /** A list of error messages */
   errors: PropTypes.arrayOf(PropTypes.string)
 };
