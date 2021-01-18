@@ -24,9 +24,10 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownCha
     const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
-      // if (!onDropdownChange) return
-      if (onDropdownChange && showContainer === true || showContainer === false) {
-        onDropdownChange(showContainer);
+      if (onDropdownChange && typeof(onDropdownChange) === 'function') {
+        // showContainer is initialized as "undefined"-- checking for explicit true or false
+        // prevents onDropdownChange from firing on component render.
+        if (showContainer === true || showContainer === false) onDropdownChange(showContainer);
       }
     }, [showContainer])
 
