@@ -37,7 +37,9 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownCha
 
     const handleInputBlur = e => {
       // relatedTarget will be one of the optionsRefs if we're trying to change focus to container
-      if (!optionRefs.current.includes(e.relatedTarget)) {
+      const rtIsOption = optionRefs.current.includes(e.relatedTarget)
+      const rtIsInDropdown = containerRef.current.contains(e.relatedTarget)
+      if (!rtIsOption && !rtIsInDropdown) {
         setShowContainer(false);
       }
     }
