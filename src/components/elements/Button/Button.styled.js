@@ -4,6 +4,7 @@ import { variant, space, layout, border, color, fontSize, boxShadow, typography 
 const ButtonStyled = styled("button")(
   {
     transition: "all 0.1s ease-in",
+    cursor: 'pointer',
   },
   variant({
     scale: "buttons",

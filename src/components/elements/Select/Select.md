@@ -37,6 +37,7 @@ It aspires to be fully WAI compliant one day, but isn't quite there yet.
 
   <Select
     onSelection={(c) => setCity(c)}
+    autocomplete
     filterOption={filterOption}
     labelAccessor="name"
     ref={selectRef}
@@ -69,6 +70,7 @@ It aspires to be fully WAI compliant one day, but isn't quite there yet.
         </Select.OptionsList>
         <div
           style={actionBarStyles}
+          tabIndex="0"
           onClick={() => {
             selectRef && selectRef.current.closeDropdown()
             alert("You can access certain public methods on the Select component by accessing its ref. \n\nFor example, `selectRef.current.closeDropdown()`")
@@ -109,6 +111,7 @@ Swappable input component:
   <Select
     onSelection={(c) => setCity(c)}
     onDropdownChange={handleDropdownChange}
+    autocomplete
     filterOption={filterOption}
     labelAccessor="name"
   >
@@ -138,6 +141,53 @@ Swappable input component:
             </Select.Option>
           ))}
         </Select.OptionsList>
+      </Select.Dropdown>
+    </Select.InputContainer>
+  </Select>
+```
+
+Or just a regular dropdown:
+
+```jsx
+  import React from 'react';
+  import Input from '../Input/Input';
+  import data from '../../../data.json';
+
+  const optionStyles = {
+    width: '100%',
+    padding: '1em .5em',
+    margin: 0.
+  }
+
+  const [city, setCity] = React.useState('');
+
+  <Select
+    onSelection={(c) => setCity(c)}
+    labelAccessor="name"
+  >
+    <Select.Label>Just pick one</Select.Label>
+
+    <Select.InputContainer>
+      <Select.Input />
+      <Select.Dropdown
+        boxShadow="depth5"
+        border="none"
+        borderColor="grey"
+      >
+        {data.map((city) => (
+          <Select.Option
+            key={city.id}
+            value={city.id}
+            option={city}
+            css={{
+              "&:hover": {
+                background: "black",
+              },
+            }}
+          >
+            <div style={optionStyles}>{city.name}</div>
+          </Select.Option>
+        ))}
       </Select.Dropdown>
     </Select.InputContainer>
   </Select>
