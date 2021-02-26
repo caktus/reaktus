@@ -14,7 +14,7 @@ import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 
 const SelectContext = createContext();
 
-const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownChange, filterOption, ...props }, ref) => {
+const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownChange, filterOption, dropdownPosition, ...props }, ref) => {
     const containerRef = createRef();
     const inputRef = createRef();
     const optionRefs = useRef([]);
@@ -124,34 +124,43 @@ const Select = forwardRef(({ children, onSelection, labelAccessor, onDropdownCha
     }
 
     return (
-        <SelectContext.Provider value={{
-            showContainer,
-            setShowContainer,
-            containerRef,
-            inputRef,
-            handleOptionSelected,
-            selectedOption,
-            inputValue,
-            handleSetInputValue,
-            filterOption,
-            handleKeyPressedInInput,
-            handleKeyPressedOnOption,
-            optionRefs,
-            handleInputFocus,
-            handleInputBlur,
-        }}>
-            <Styled.Wrapper {...props}>
-                {children}
-            </Styled.Wrapper>
-        </SelectContext.Provider>
-
+      <SelectContext.Provider
+        value={{
+          showContainer,
+          setShowContainer,
+          containerRef,
+          inputRef,
+          handleOptionSelected,
+          selectedOption,
+          inputValue,
+          handleSetInputValue,
+          filterOption,
+          handleKeyPressedInInput,
+          handleKeyPressedOnOption,
+          optionRefs,
+          handleInputFocus,
+          handleInputBlur,
+          dropdownPosition,
+        }}
+      >
+        <Styled.Wrapper {...props}>{children}</Styled.Wrapper>
+      </SelectContext.Provider>
     );
 });
+
+export const DROPDOWN_POSITIONS = {
+  TOP: "top",
+  RIGHT: "right",
+  BOTTOM: "bottom",
+  LEFT: "left",
+};
+
 
 Select.propTypes = {
   onSelection: PropTypes.func,
   /** Fires when dropdown opens or closes  */
   onDropdownChange: PropTypes.func,
+  dropdownPosition: PropTypes.oneOf(Object.values(DROPDOWN_POSITIONS)),
 };
 
 Select.Label = function Label({ children, ...props }) {
@@ -209,22 +218,25 @@ Select.Input.defaultProps = {
     labelAccessor: 'label'
 }
 
-export const TOP = 'TOP'
-export const RIGHT = 'RIGHT'
-export const BOTTOM = 'BOTTOM'
-export const LEFT = 'LEFT'
-
 Select.Dropdown = function Dropdown({ children, scrollArea, ...props }) {
-    const { containerRef, showContainer } = useContext(SelectContext)
-    const [containerPosition, setContainerPosition] = useState(BOTTOM)
+    const { containerRef, showContainer, dropdownPosition } = useContext(
+      SelectContext
+    );
+    const [containerPosition, setContainerPosition] = useState(
+      DROPDOWN_POSITIONS.BOTTOM
+    );
     const intersections = useIntersectionObserver(containerRef, scrollArea)
 
     // listen to intersections for changes, set position accordingly
     useEffect(() => {
-        if (intersections.topHit) setContainerPosition(BOTTOM)
-        if (intersections.rightHit) setContainerPosition(LEFT)
-        if (intersections.bottomHit) setContainerPosition(TOP)
-        if (intersections.leftHit) setContainerPosition(RIGHT)
+      if (!dropdownPosition) {
+        if (intersections.topHit) setContainerPosition(DROPDOWN_POSITIONS.BOTTOM);
+        if (intersections.rightHit) setContainerPosition(DROPDOWN_POSITIONS.LEFT);
+        if (intersections.bottomHit) setContainerPosition(DROPDOWN_POSITIONS.TOP);
+        if (intersections.leftHit) setContainerPosition(DROPDOWN_POSITIONS.RIGHT);
+      } else {
+        setContainerPosition(dropdownPosition);
+      }
     }, [intersections])
 
     return (

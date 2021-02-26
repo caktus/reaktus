@@ -39,6 +39,7 @@ It aspires to be fully WAI compliant one day, but isn't quite there yet.
     onSelection={(c) => setCity(c)}
     autocomplete
     filterOption={filterOption}
+    dropdownPosition="bottom"
     labelAccessor="name"
     ref={selectRef}
   >
