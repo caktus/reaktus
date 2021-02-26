@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { space, layout, color, border, fontSize, boxShadow } from 'styled-system'
-import { BOTTOM, LEFT, RIGHT, TOP } from './Select';
+import { DROPDOWN_POSITIONS } from './Select';
 
 export const Wrapper = styled.div`
   ${space}
@@ -50,16 +50,16 @@ export const Dropdown = styled.div`
   z-index: 99;
   ${({ containerPosition }) => {
     switch (containerPosition) {
-      case TOP: return css`
+      case DROPDOWN_POSITIONS.TOP: return css`
         bottom: 100%; /* renders ABOVE the wrapper */
       `;
-      case RIGHT: return css`
+      case DROPDOWN_POSITIONS.RIGHT: return css`
         left: 100%; /* renders RIGHT of the wrapper */
       `;
-      case BOTTOM: return css`
+      case DROPDOWN_POSITIONS.BOTTOM: return css`
         top: 100%; /* renders BELOW of the wrapper */
       `;
-      case LEFT: return css`
+      case DROPDOWN_POSITIONS.LEFT: return css`
         right: 100%; /* renders LEFT of the wrapper */
       `;
       default: return css`
